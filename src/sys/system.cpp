@@ -87,7 +87,7 @@ static void Error_Handler(void);
 // System Level C functions and IRQ Handlers
 extern "C"
 {
-    void SysTick_Handler(void)
+    __weak void SysTick_Handler(void)
     {
         HAL_IncTick();
         HAL_SYSTICK_IRQHandler();

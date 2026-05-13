@@ -840,7 +840,7 @@ UartHandler::EndCallbackFunctionPtr UartHandler::Impl::next_end_callback_;
 void*                               UartHandler::Impl::next_callback_context_;
 
 // HAL Interface functions
-void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
+__weak void HAL_UART_MspInit(UART_HandleTypeDef* uartHandle)
 {
     UartHandler::Impl* handle = MapInstanceToHandle(uartHandle->Instance);
     GPIOClockEnable(handle->config_.pin_config.rx);
@@ -1037,15 +1037,15 @@ void UART_IRQHandler(UartHandler::Impl* handle)
 
 extern "C"
 {
-    void USART1_IRQHandler() { UART_IRQHandler(&uart_handles[0]); }
-    void USART2_IRQHandler() { UART_IRQHandler(&uart_handles[1]); }
-    void USART3_IRQHandler() { UART_IRQHandler(&uart_handles[2]); }
-    void UART4_IRQHandler() { UART_IRQHandler(&uart_handles[3]); }
-    void UART5_IRQHandler() { UART_IRQHandler(&uart_handles[4]); }
-    void USART6_IRQHandler() { UART_IRQHandler(&uart_handles[5]); }
-    void UART7_IRQHandler() { UART_IRQHandler(&uart_handles[6]); }
-    void UART8_IRQHandler() { UART_IRQHandler(&uart_handles[7]); }
-    void LPUART1_IRQHandler() { UART_IRQHandler(&uart_handles[8]); }
+    __weak void USART1_IRQHandler() { UART_IRQHandler(&uart_handles[0]); }
+    __weak void USART2_IRQHandler() { UART_IRQHandler(&uart_handles[1]); }
+    __weak void USART3_IRQHandler() { UART_IRQHandler(&uart_handles[2]); }
+    __weak void UART4_IRQHandler() { UART_IRQHandler(&uart_handles[3]); }
+    __weak void UART5_IRQHandler() { UART_IRQHandler(&uart_handles[4]); }
+    __weak void USART6_IRQHandler() { UART_IRQHandler(&uart_handles[5]); }
+    __weak void UART7_IRQHandler() { UART_IRQHandler(&uart_handles[6]); }
+    __weak void UART8_IRQHandler() { UART_IRQHandler(&uart_handles[7]); }
+    __weak void LPUART1_IRQHandler() { UART_IRQHandler(&uart_handles[8]); }
 }
 
 void HalUartDmaRxStreamCallback(void)
